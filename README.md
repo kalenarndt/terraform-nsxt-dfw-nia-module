@@ -28,7 +28,7 @@ This module will dynamically create the following objects based on the health of
 
 In order for Consul-Terraform-Sync to create rules with specific source and destinations, the service registration for the application service has to have a `meta` definition with a key of `downstream` and the value is the downstream service that consumes this.  An example would be `web` is downstream (consumer) of `api` so `api` will need `downstream: web`. 
 
-If you have a service with no `downstream` dependencies this can be left blank it the source field in the firewall definition will be defaulted to `any`
+If you have a service with no `downstream` dependencies this can be left blank. The source field in the Distributed Firewall definition will be defaulted to `any`
 
 ```hcl
 {
