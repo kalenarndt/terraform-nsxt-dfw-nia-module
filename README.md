@@ -16,6 +16,15 @@ This module will dynamically create the following objects based on the health of
 
 ---
 
+## Limitations
+
+-  1 rule per service definition from Consul
+-  1 tag from the service in Consul and the name of the service is always the scope 
+-  Services are always TCP - We cannot determine the protocol unless we also supply custom metadata via the service registration in Consul
+-  1 Tag per service (Service = Web in Consul should have all the same tag names EG. web-prod for Web1,Web2,Web3)
+
+---
+
 ## Pre-Requisites
 
 - HashiCorp Consul 
