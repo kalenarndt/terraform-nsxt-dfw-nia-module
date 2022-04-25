@@ -118,7 +118,7 @@ resource "nsxt_policy_security_policy" "policy" {
     for_each = length(local.policy_path_list) >= 1 ? ["true"] : []
     content {
       display_name = "Consul-Terraform-Sync Drop"
-      action       = "DROP"
+      action       = var.default_action
       logged       = true
       scope        = local.policy_path_list
     }

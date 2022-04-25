@@ -29,3 +29,13 @@ variable "cts_prefix" {
   description = "(Optional) Prefix that will be applied to all objects created via Consul-Terraform-Sync"
   default     = "cts-"
 }
+
+variable "default_action" {
+  type        = string
+  description = "Default action for the rule at the bottom of the section created by Consul-Terraform-Sync. "
+  validation {
+    condition     = var.default_action != "DROP" || var.default_action != "ALLOW" || var.default_action != "REJECT"
+    error_message = "The variable default_action must be \"DROP\", \"ALLOW\", or \"REJECT\"."
+  }
+  default = "ALLOW"
+}
