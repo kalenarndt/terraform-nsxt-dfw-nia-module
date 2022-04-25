@@ -1,4 +1,4 @@
-# terraform-nsxt-nsxt-dfw-nia-module
+# terraform-nst-dfw-nia-module
 
 ### This module is specifically designed to be used with Consul-Terraform-Sync. 
 
