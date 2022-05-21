@@ -63,6 +63,64 @@ If you have a service with no `downstream` dependencies this can be left blank. 
   }
 }
 ```
+---
+#### Example Task Definition (Consul-Terraform-Sync Worker)
+
+This example is based on using Terraform Cloud which requries Consul Enterprise. This can be modified to use the regular Terraform task driver as well.
+
+##### Terraform Cloud Driver
+```hcl
+driver "terraform-cloud" {
+  hostname     = "https://app.terraform.io"
+  organization = "my-org"
+  token        = "my-token"
+  workspaces = {
+    tags       = ["cts","nsxt","web","app","db","demo"]
+    prefix     = "cts-"
+  }
+
+  required_providers {
+    nsxt = {
+      source  = "vmware/nsxt"
+      version = ">=3.2.0"
+    }
+  }
+}
+```
+
+##### Provider Definition
+```hcl
+terraform_provider "nsxt" {
+  username             = "admin"
+  password             = "my-password"
+  host                 = "my-nsxt-manager"
+  allow_unverified_ssl = true
+}
+```
+
+##### Task Definition
+```hcl
+task {
+  name        = "nsxt-fakeservice-dfw"
+  description = "Creates Distributed Firewall rules based on the available applications"
+  providers   = ["nsxt"]
+  module      = "github.com/kalenarndt/terraform-nsxt-dfw-nia-module"
+  variable_files = ["/etc/consul-terraform-sync.d/nsxt.tfvars"]
+  condition "services" {
+    names = ["web","app","db"]
+  }
+
+  terraform_cloud_workspace {
+    execution_mode = "agent"
+    agent_pool_name = "my-tfc-agents"
+  }
+}
+```
+
+##### tfvars Definition
+```hcl
+default_action = "DROP"
+```
 
 ---
 

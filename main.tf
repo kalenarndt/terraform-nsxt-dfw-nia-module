@@ -64,7 +64,7 @@ resource "nsxt_policy_group" "security_group" {
 }
 
 locals {
-  # Gives us a list of all policy paths associated with the security groups in the run. This is used for the default deny at the bottom of the CTS section.
+  # Gives us a list of all policy paths associated with the security groups in the run. This is used for the default allow/deny at the bottom of the CTS section.
   policy_path_list = [for _, s in nsxt_policy_group.security_group : s.path]
 }
 
