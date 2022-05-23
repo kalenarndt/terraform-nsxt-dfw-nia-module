@@ -27,8 +27,8 @@ This module will dynamically create the following objects based on the health of
 
 ## Pre-Requisites
 
-- HashiCorp Consul 
-- HashiCorp Consul Terraform Sync
+- HashiCorp Consul (>=v1.10.9)
+- HashiCorp Consul Terraform Sync (>=v0.6.0)
 - Service Metadata Definitions
 
 ---
